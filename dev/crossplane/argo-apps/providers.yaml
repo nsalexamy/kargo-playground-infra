@@ -15,7 +15,7 @@ metadata:
 spec:
   project: platform-system
   source:
-    repoURL: https://github.com/TeckResources/da-platform-system
+    repoURL: https://github.com/nsalexamy/kargo-playground-infra.git
     path: dev/crossplane/providers
     directory:
       recurse: true
