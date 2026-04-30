@@ -19,7 +19,7 @@ spec:
       helm:
         releaseName: crossplane
         valueFiles:
-          - dev/crossplane/values.yaml
+          - $values/dev/crossplane/values.yaml
       repoURL: https://charts.crossplane.io/stable
       targetRevision: 2.2.0
     - repoURL: https://github.com/nsalexamy/kargo-playground-infra.git
