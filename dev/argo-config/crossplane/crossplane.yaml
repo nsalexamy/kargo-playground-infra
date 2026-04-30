@@ -1,0 +1,36 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: crossplane
+  namespace: argo-cd
+  labels:
+    argocd.argoproj.io/instance: crossplane
+    argocd.argoproj.io/group: crossplane
+    env: dev
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+  annotations:
+    argocd-diff-preview/watch-pattern: |
+      dev/crossplane/argo-apps/[^/]+$
+spec:
+  project: platform-system
+  sources:
+    - repoURL: https://github.com/nsalexamy/kargo-playground-infra.git
+      targetRevision: HEAD
+      path: dev/crossplane/argo-apps
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: crossplane-system
+  syncPolicy:
+    automated:
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+      - ServerSideApply=true
+    retry:
+      limit: -1
+      backoff:
+        duration: 5s
+        factor: 2
+        maxDuration: 3m
+
