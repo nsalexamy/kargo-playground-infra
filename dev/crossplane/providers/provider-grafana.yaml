@@ -1,0 +1,36 @@
+apiVersion: pkg.crossplane.io/v1
+kind: Provider
+metadata:
+  name: provider-grafana
+spec:
+  package: xpkg.upbound.io/grafana/provider-grafana:v2.9.0
+---
+apiVersion: grafana.crossplane.io/v1beta1
+kind: ProviderConfig
+metadata:
+  name: default
+  annotations:
+    argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
+# spec:
+#   credentials:
+#     secretRef:
+#       key: credentials
+#       name: grafana-secret
+#       namespace: crossplane-system
+#     source: Secret
+---
+apiVersion: apiextensions.crossplane.io/v1alpha1
+kind: ManagedResourceActivationPolicy
+metadata:
+  name: provider-grafana
+spec:
+  activate:
+  # Namespaced Resources, please use fully qualified resource names, no wildcards
+  - clusterproviderconfigs.grafana.m.crossplane.io
+  - providerconfigs.grafana.m.crossplane.io
+  - dashboards.oss.grafana.m.crossplane.io
+  - folders.oss.grafana.m.crossplane.io
+
+  # Global Resources
+  - "*.grafana.crossplane.io"
+  #- "*.grafana.m.crossplane.io"
