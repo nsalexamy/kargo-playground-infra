@@ -33,4 +33,4 @@ spec:
 
   # Global Resources
   - "*.grafana.crossplane.io"
-  #- "*.grafana.m.crossplane.io"
+  - "*.grafana.m.crossplane.io"
