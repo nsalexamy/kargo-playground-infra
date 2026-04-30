@@ -32,5 +32,10 @@ spec:
   - folders.oss.grafana.m.crossplane.io
 
   # Global Resources
-  - "*.grafana.crossplane.io"
-  - "*.grafana.m.crossplane.io"
+  # - "*.grafana.crossplane.io"
+  # - "*.grafana.m.crossplane.io"
+  - "dashboards.oss.grafana.crossplane.io"
+  - "datasources.oss.grafana.crossplane.io"
+  - "folders.oss.grafana.crossplane.io"
+  - "providerconfigs.grafana.crossplane.io"
+  - "providerconfigusages.grafana.crossplane.io"
