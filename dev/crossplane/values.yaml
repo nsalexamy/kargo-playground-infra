@@ -2,6 +2,9 @@ args:
 - --debug
 replicas: 1
 
+provider:
+  defaultActivations: []
+
 resourcesCrossplane:
   limits:
     memory: 512Mi

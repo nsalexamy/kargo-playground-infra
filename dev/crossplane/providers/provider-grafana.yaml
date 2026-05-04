@@ -2,8 +2,8 @@ apiVersion: pkg.crossplane.io/v1
 kind: Provider
 metadata:
   name: provider-grafana
-  annotations:
-    argocd.argoproj.io/sync-wave: "0"  
+  #annotations:
+  #  argocd.argoproj.io/sync-wave: "0"  
 spec:
   package: xpkg.upbound.io/grafana/provider-grafana:v2.9.0
 ---
@@ -25,8 +25,8 @@ apiVersion: apiextensions.crossplane.io/v1alpha1
 kind: ManagedResourceActivationPolicy
 metadata:
   name: provider-grafana
-  annotations:
-    argocd.argoproj.io/sync-wave: "-1"   # applied before the Provider  
+  #annotations:
+  #  argocd.argoproj.io/sync-wave: "-1"   # applied before the Provider  
 spec:
   activate:
   # Namespaced Resources, please use fully qualified resource names, no wildcards
