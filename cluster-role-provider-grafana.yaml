@@ -1,0 +1,110 @@
+apiVersion: rbac.authorization.k8s.io/v1
+
+kind: ClusterRole
+
+metadata:
+
+  creationTimestamp: "2026-05-01T22:50:17Z"
+
+  labels:
+
+    rbac.crossplane.io/system: provider-grafana-5af684533e9e
+
+  name: crossplane:provider:provider-grafana-5af684533e9e:system
+
+  ownerReferences:
+
+  - apiVersion: pkg.crossplane.io/v1
+
+    blockOwnerDeletion: true
+
+    controller: true
+
+    kind: ProviderRevision
+
+    name: provider-grafana-5af684533e9e
+
+    uid: 491c6ec5-ffb5-4876-a7b8-46bbf4831313
+
+  resourceVersion: "1214297957"
+
+  uid: 3ff29bde-6ead-4d40-9e72-90a65cbc723a
+
+rules:
+
+- apiGroups:
+
+  - alerting.grafana.crossplane.io
+
+  resources:
+
+  - alertenrichmentv1beta1s
+
+  - alertenrichmentv1beta1s/status
+
+  - alertrulev0alpha1s
+
+  - alertrulev0alpha1s/status
+
+  verbs:
+
+  - get
+
+  - list
+
+  - watch
+
+  - update
+
+  - patch
+
+  - create
+
+- apiGroups:
+
+  - alerting.grafana.crossplane.io
+
+  resources:
+
+  - '*/finalizers'
+
+  verbs:
+
+  - update
+
+- apiGroups:
+
+  - ""
+
+  - coordination.k8s.io
+
+  resources:
+
+  - secrets
+
+  - configmaps
+
+  - events
+
+  - leases
+
+  verbs:
+
+  - '*'
+
+- apiGroups:
+
+  - apiextensions.k8s.io
+
+  resources:
+
+  - customresourcedefinitions
+
+  verbs:
+
+  - get
+
+  - list
+
+  - watch
+
