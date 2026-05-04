@@ -42,7 +42,7 @@ kubectl get crds -o name | Where-Object { $_ -like "*$provider_suffix*" } | ForE
     # trim until '/' to get the CRD name
     $crdName = $_.Split('/')[1]
     Write-Output "CRD name: $crdName"
-    $crds = kubectl get $($crdName) --all-namespaces -o json | ConvertFrom-Json
+    #$crds = kubectl get $($crdName) --all-namespaces -o json | ConvertFrom-Json
 
     if ($crdsInUse -notcontains $crdName) {
         Write-Output "CRD '$crdName' is not in use and can be deleted."
@@ -60,9 +60,18 @@ $scriptFile = "delete-${mrap_name}-crds.ps1"
 
 $scriptContents = ''
 
-foreach ($item in $willBeDeleted.items) {
-    $scriptContents += "kubectl delete crd $item \n"    
+foreach ($item in $willBeDeleted) {
+    # append "kubectl delete crd $item \n" to the script contents
+    $scriptContents += "kubectl delete crd $item `n"    
+    # $scriptContents += "kubectl delete crd $item `n"    
 }
+
+#foreach ($item in $willBeDeleted) {
+#    $scriptContents += "kubectl delete crd $item \n"    
+#}
+
+Write-Output "$scriptContents"
+
 
 $scriptContents | Out-File -FilePath $scriptFile -Encoding utf8
 

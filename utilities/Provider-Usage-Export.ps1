@@ -22,7 +22,7 @@ kubectl get crds -o name | Where-Object { $_ -like "*$provider_suffix*" } | ForE
     Write-Output "CRD name: $crdName"
     $crds = kubectl get $($crdName) --all-namespaces -o json | ConvertFrom-Json
     if ($crds.items.length -gt 0) {
-        $results += $crd.metadata.name
+        $results += $crdName
     }
 
 } 
