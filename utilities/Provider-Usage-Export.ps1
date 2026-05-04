@@ -14,28 +14,18 @@ if (-not $provider_suffix) {
 $results = @()
 
 # search all CRDs with the specified provider suffix and extract usage information
-kubectl get crds -o json | ConvertFrom-Json | Select-Object -ExpandProperty items | ForEach-Object {
-    #$crd = $_
-    #Write-Output "Processing CRD: $($crd.metadata)"
+kubectl get crds -o name | Where-Object { $_ -like "*$provider_suffix*" } | ForEach-Object {
+    #Write-Output "Processing CRD: $_"
 
-    ForEach-Object {
-        $crd = $_
-
-        # Check if the CRD name contains the provider suffix
-        if ($crd.metadata.name -notlike "*$provider_suffix*") {
-            return
-        }
-
-        Write-Output "Processing CRD: $($crd.metadata.name)"
-        # if the CRD has items with providerConfigRef that matches the provider suffix, add it to the results
-        $crds = kubectl get $($crd.metadata.name) --all-namespaces -o json | ConvertFrom-Json
-        if ($crds.items.length -gt 0) {
-            $results += $crd.metadata.name
-        }
+    # trim until '/' to get the CRD name
+    $crdName = $_.Split('/')[1]
+    Write-Output "CRD name: $crdName"
+    $crds = kubectl get $($crdName) --all-namespaces -o json | ConvertFrom-Json
+    if ($crds.items.length -gt 0) {
+        $results += $crd.metadata.name
     }
+
 } 
-
-
 
 # Output
 

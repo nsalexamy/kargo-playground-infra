@@ -33,21 +33,23 @@ if (Test-Path $usage_file) {
 $mrap = kubectl get mrap $mrap_name -o json | ConvertFrom-Json
 $crdsInUse += $mrap.spec.activate
 
-kubectl get crds -o json | ConvertFrom-Json | Select-Object -ExpandProperty items |
-    Where-Object { $_.metadata.name -like "*$provider_suffix*" } |
-    ForEach-Object {
-        $crd = $_
 
-        # Check if the CRD name contains the provider suffix
-        if ($crd.metadata.name -notlike "*$provider_suffix*") {
-            return
-        }
+kubectl get crds -o name | Where-Object { $_ -like "*$provider_suffix*" } | ForEach-Object {
+    #Write-Output "Processing CRD: $_"
 
-        if ($crdsInUse -notcontains $crd.metadata.name) {
-            Write-Output "CRD '$($crd.metadata.name)' is not in use and can be deleted."
-            # Uncomment the line below to actually delete the CRD
-            # kubectl delete crd $crd.metadata.name
-        } else {
-            Write-Output "CRD '$($crd.metadata.name)' is in use and cannot be deleted."
-        }
+    # trim until '/' to get the CRD name
+    $crdName = $_.Split('/')[1]
+    Write-Output "CRD name: $crdName"
+    $crds = kubectl get $($crdName) --all-namespaces -o json | ConvertFrom-Json
+
+    if ($crdsInUse -notcontains $crdName) {
+        Write-Output "CRD '$crdName' is not in use and can be deleted."
+        # Uncomment the line below to actually delete the CRD
+        # kubectl delete crd $crdName
+    } else {
+        Write-Output "CRD '$crdName' is in use and cannot be deleted."
     }
+
+} 
+
+
