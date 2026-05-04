@@ -34,6 +34,8 @@ $mrap = kubectl get mrap $mrap_name -o json | ConvertFrom-Json
 $crdsInUse += $mrap.spec.activate
 
 
+$willBeDeleted = @()
+
 kubectl get crds -o name | Where-Object { $_ -like "*$provider_suffix*" } | ForEach-Object {
     #Write-Output "Processing CRD: $_"
 
@@ -44,6 +46,7 @@ kubectl get crds -o name | Where-Object { $_ -like "*$provider_suffix*" } | ForE
 
     if ($crdsInUse -notcontains $crdName) {
         Write-Output "CRD '$crdName' is not in use and can be deleted."
+        $willBeDeleted += $crdName
         # Uncomment the line below to actually delete the CRD
         # kubectl delete crd $crdName
     } else {
@@ -52,4 +55,14 @@ kubectl get crds -o name | Where-Object { $_ -like "*$provider_suffix*" } | ForE
 
 } 
 
+# Write Powershell script
+$scriptFile = "delete-${mrap_name}-crds.ps1"
+
+$scriptContents = ''
+
+foreach ($item in $willBeDeleted.items) {
+    $scriptContents += "kubectl delete crd $item \n"    
+}
+
+$scriptContents | Out-File -FilePath $scriptFile -Encoding utf8
 
