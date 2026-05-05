@@ -1,0 +1,27 @@
+
+dav-clarke
+Should we remove this one?
+Also, we should add datasources.oss.grafana.m.crossplane.io if we have the global version
+
+Young-Kim-Teck replied 
+
+Young-Kim-Teck
+Author
+Do we need to add both legacy version and modern version for datasources?
+
+It seems that the activation policy seems to active both of them.
+datasources.oss.grafana.crossplane.io 2025-06-23T23:36:49Z
+datasources.oss.grafana.m.crossplane.io 2026-05-01T20:41:57Z
+
+Young-Kim-Teck replied 
+
+Young-Kim-Teck
+Author
+As for 'providerconfigs.grafana.m.crossplane.io', I just followed what Ivan did during the meeting. @IvanJosipovic would you confirm this?
+
+IvanJosipovic replied 
+
+IvanJosipovic
+Lets keep the namespaced and global MRS 1:1 for now. Going forward we will discourage the use of the global MRs.
+
+Here are comments on this file. Explain what Ivan said in his comment.
