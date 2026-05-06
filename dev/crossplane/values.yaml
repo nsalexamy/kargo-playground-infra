@@ -3,7 +3,8 @@ args:
 replicas: 1
 
 provider:
-  defaultActivations: []
+  #defaultActivations: []
+  defaultActivations: {} 
 
 resourcesCrossplane:
   limits:
