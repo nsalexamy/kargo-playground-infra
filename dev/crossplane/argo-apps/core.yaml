@@ -21,7 +21,7 @@ spec:
         valueFiles:
           - $values/dev/crossplane/values.yaml
       repoURL: https://charts.crossplane.io/stable
-      targetRevision: 2.2.0
+      targetRevision: 2.2.1
     - repoURL: https://github.com/nsalexamy/kargo-playground-infra.git
       targetRevision: HEAD
       ref: values
