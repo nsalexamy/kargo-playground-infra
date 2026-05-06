@@ -251,8 +251,8 @@ configs:
   # 408
   # Argo CD configuration parameters
   ## Ref: https://github.com/argoproj/argo-cd/blob/master/docs/operator-manual/argocd-cmd-params-cm.yaml
-  params:
-    server.insecure: true
+  #params:
+  #  server.insecure: true
 
 
   #repositories:
