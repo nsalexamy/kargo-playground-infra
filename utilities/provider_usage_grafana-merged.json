@@ -1,0 +1,11 @@
+[
+  "clusterproviderconfigs.grafana.m.crossplane.io",
+  "providerconfigs.grafana.m.crossplane.io",
+  "dashboards.oss.grafana.m.crossplane.io",
+  "folders.oss.grafana.m.crossplane.io",
+  "dashboards.oss.grafana.crossplane.io",
+  "datasources.oss.grafana.crossplane.io",
+  "folders.oss.grafana.crossplane.io",
+  "providerconfigs.grafana.crossplane.io",
+  "providerconfigusages.grafana.crossplane.io"
+]

@@ -64,7 +64,7 @@ $scriptContents = ''
 foreach ($item in $willBeDeleted) {
     # append "kubectl delete crd $item \n" to the script contents
     $scriptContents += "kubectl delete mrd $item `n"    
-    $scriptContents += "kubectl delete crd $item `n"    
+
     # $scriptContents += "kubectl delete crd $item `n"    
 }
 
