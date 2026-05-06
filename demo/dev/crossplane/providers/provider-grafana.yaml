@@ -4,6 +4,10 @@ metadata:
   name: provider-grafana
 spec:
   package: xpkg.upbound.io/grafana/provider-grafana:v2.9.0
+  runtimeConfigRef:
+    apiVersion: pkg.crossplane.io/v1beta1
+    kind: DeploymentRuntimeConfig
+    name: grafana-provider-runtime
 ---
 apiVersion: grafana.crossplane.io/v1beta1
 kind: ProviderConfig
@@ -18,6 +22,40 @@ metadata:
 #       name: grafana-secret
 #       namespace: crossplane-system
 #     source: Secret
+---
+apiVersion: grafana.m.crossplane.io/v1beta1
+kind: ClusterProviderConfig
+metadata:
+  name: default
+  annotations:
+    argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
+# spec:
+#   credentials:
+#     secretRef:
+#       key: creds
+#       name: azure-secret
+#       namespace: crossplane-system
+#     source: Secret
+---
+apiVersion: pkg.crossplane.io/v1beta1
+kind: DeploymentRuntimeConfig
+metadata:
+  name: grafana-provider-runtime
+spec:
+  deploymentTemplate:
+    spec:
+      replicas: 1
+      selector: {}
+      template:
+        spec:
+          containers:
+            - name: package-runtime
+              args:
+                - --safe-start
+              resources:
+                requests:
+                  memory: "256Mi"
+                  cpu: "250m"
 ---
 apiVersion: apiextensions.crossplane.io/v1alpha1
 kind: ManagedResourceActivationPolicy
