@@ -64,16 +64,15 @@ metadata:
 spec:
   activate:
   # Namespaced Resources, please use fully qualified resource names, no wildcards
-  - clusterproviderconfigs.grafana.m.crossplane.io
-  - providerconfigs.grafana.m.crossplane.io
-  - dashboards.oss.grafana.m.crossplane.io
-  - folders.oss.grafana.m.crossplane.io
+  - "dashboards.oss.grafana.m.crossplane.io"
+  - "datasources.oss.grafana.m.crossplane.io"
+  - "folders.oss.grafana.m.crossplane.io"
+  - "folderpermissions.oss.grafana.m.crossplane.io"
+  - "librarypanels.oss.grafana.m.crossplane.io"
 
   # Global Resources
-  # - "*.grafana.crossplane.io"
-  # - "*.grafana.m.crossplane.io"
   - "dashboards.oss.grafana.crossplane.io"
   - "datasources.oss.grafana.crossplane.io"
   - "folders.oss.grafana.crossplane.io"
-  - "providerconfigs.grafana.crossplane.io"
-  - "providerconfigusages.grafana.crossplane.io"
+  - "folderpermissions.oss.grafana.crossplane.io"
+  - "librarypanels.oss.grafana.crossplane.io"
